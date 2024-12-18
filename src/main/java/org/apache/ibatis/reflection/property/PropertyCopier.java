@@ -35,8 +35,9 @@ public final class PropertyCopier {
    * @param sourceBean 提供属性值的对象
    * @param destinationBean 要被写入新属性值的对象
    */
+  //grammar.reflect.通过反射复制对象属性，估计跟beanutils类似
   public static void copyBeanProperties(Class<?> type, Object sourceBean, Object destinationBean) {
-    // 这两个对象同属的类
+    // 这两个对象同属的类，需要一直循环把当前类和父类的所有属性复制一遍
     Class<?> parent = type;
     while (parent != null) {
       // 获取该类的所有属性

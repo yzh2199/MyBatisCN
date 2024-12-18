@@ -43,6 +43,7 @@ public class GetFieldInvoker implements Invoker {
       // 直接通过反射获取目标属性的值
       return field.get(target);
     } catch (IllegalAccessException e) { // 如果无法访问
+      //tbr.为什么这样能够修改访问属性
       if (Reflector.canControlMemberAccessible()) { // 如果属性的访问性可以修改
         // 将属性的可访问性修改为可访问
         field.setAccessible(true);

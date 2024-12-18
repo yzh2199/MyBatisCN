@@ -99,6 +99,7 @@ public class DefaultObjectFactory implements ObjectFactory, Serializable {
       }
     } catch (Exception e) {
       // 收集所有的参数类型
+      //grammar.opt.学习oeElseGet
       String argTypes = Optional.ofNullable(constructorArgTypes).orElseGet(Collections::emptyList)
           .stream().map(Class::getSimpleName).collect(Collectors.joining(","));
       // 收集所有的参数

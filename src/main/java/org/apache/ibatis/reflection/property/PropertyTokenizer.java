@@ -39,6 +39,7 @@ public class PropertyTokenizer implements Iterator<PropertyTokenizer> {
   // name
   private final String children;
 
+  //algorithm.str.先处理.分隔的部分再处理[分隔的部分，可以看到是一种结构化的思路
   public PropertyTokenizer(String fullname) {
     int delim = fullname.indexOf('.');
     if (delim > -1) {
