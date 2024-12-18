@@ -102,7 +102,7 @@ public class Reflector {
   }
 
   /**
-   * 找出类中的get方法
+   * algorithm.找出类中的get方法
    * @param clazz 需要被反射处理的目标类
    */
   private void addGetMethods(Class<?> clazz) {
