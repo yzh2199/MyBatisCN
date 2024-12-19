@@ -4,6 +4,7 @@
   - grammar：学习这种语法写法
     - opt：optional的语法
     - reflect：反射的语法
+    - basic：一些基础的语法
   - algorithm：学习这种算法写法
   - pattern：学习这种设计模式
   - tbr：待解决的问题，to be resolved

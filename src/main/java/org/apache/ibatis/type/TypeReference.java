@@ -36,6 +36,8 @@ public abstract class TypeReference<T> {
   private final Type rawType;
 
   protected TypeReference() {
+    //grammar.basic.在无参构造函数中为类属性赋值，这样只要对象创建这个属性立马就有值了
+    //grammar.basic.子类实例化导致的父类无参方法被调用时，getClass返回的是子类的类型
     rawType = getSuperclassTypeParameter(getClass());
   }
 
@@ -46,11 +48,15 @@ public abstract class TypeReference<T> {
    */
   Type getSuperclassTypeParameter(Class<?> clazz) {
     // 获取clazz类的带有泛型的直接父类
+    //Class和ParameterizedTypeImpl都实现了Type接口，这里的type其实是一个ParameterizedTypeImpl
+    //tbr.为啥这里返回的type是ParameterizedTypeImpl呢，因为返回的对象本来就可以是Type的子类
+    //grammar.reflect.这个方法返回的是类的带范型参数的父类
     Type genericSuperclass = clazz.getGenericSuperclass();
-    if (genericSuperclass instanceof Class) {
-      // 进入这里说明genericSuperclass是class的实例
+    //grammar.reflect.原来上面的get方法取到的父类，如果是不带范型的类，这个类的类型就是Class，带范型的类的类型就是Parameterized,这个反射机制记住
+    //这个判断条件其实就是在判断获取的父类是不是带范型的，不是带范型的就再找父类的父类直到找到带范型的那个
+    if (genericSuperclass instanceof Class) { //tbr.什么时候会是class类呢，不是应该都是Parameterized吗：TypeReferenceDemo里有例子
+      //如果是类且不是TypeReference说明还得找哪里把范型给实例化了，就继续往上找
       if (TypeReference.class != genericSuperclass) { // genericSuperclass不是TypeReference类本身
-        // 说明没有解析到足够上层，将clazz类的父类作为入参递归调用
         return getSuperclassTypeParameter(clazz.getSuperclass());
       }
       // 说明clazz实现了TypeReference类，但是却没有使用泛型
@@ -60,7 +66,7 @@ public abstract class TypeReference<T> {
 
     // 运行到这里说明genericSuperclass是泛型类。获取泛型的第一个参数，即T
     Type rawType = ((ParameterizedType) genericSuperclass).getActualTypeArguments()[0];
-    if (rawType instanceof ParameterizedType) { // 如果时参数化类型
+    if (rawType instanceof ParameterizedType) { // 如果是参数化类型
       // 获取参数化类型的实际类型
       rawType = ((ParameterizedType) rawType).getRawType();
     }
