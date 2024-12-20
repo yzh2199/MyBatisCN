@@ -29,6 +29,7 @@ import org.apache.ibatis.logging.LogFactory;
 
 /**
  * Provides a very simple API for accessing resources within an application server.
+ * computer.file.通过VFS可以和各种文件类型的系统交互
  *
  * @author Ben Gunter
  */
@@ -42,6 +43,8 @@ public abstract class VFS {
   public static final List<Class<? extends VFS>> USER_IMPLEMENTATIONS = new ArrayList<>();
 
   /** Singleton instance holder. */
+  //pattern.单例模式，这个单例可以根据环境创建不同的单例
+  //注意单例需要用static保证只在类加载的时候创建一次
   private static class VFSHolder {
     // 最终指定的实现类
     static final VFS INSTANCE = createVFS();

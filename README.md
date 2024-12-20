@@ -8,3 +8,5 @@
   - algorithm：学习这种算法写法
   - pattern：学习这种设计模式
   - tbr：待解决的问题，to be resolved
+  - computer：学习这种计算机基础相关知识
+    - file：文件相关

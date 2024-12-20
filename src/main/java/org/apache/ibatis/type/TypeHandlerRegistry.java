@@ -66,6 +66,7 @@ public final class TypeHandlerRegistry {
   // 默认的枚举类型处理器
   private Class<? extends TypeHandler> defaultEnumTypeHandler = EnumTypeHandler.class;
 
+  //grammar.jdbc.java类型和jdbc类型的映射关系，可以参考
   public TypeHandlerRegistry() {
     register(Boolean.class, new BooleanTypeHandler());
     register(boolean.class, new BooleanTypeHandler());
@@ -231,6 +232,8 @@ public final class TypeHandlerRegistry {
     }
 
     // 先根据Java类型找到对应的jdbcHandlerMap
+    //grammar.basic.可以参考，当c依赖a和b确定，a和b又不是一一对应关系时，可以用嵌套map记录这种关系
+    //外层map记录a和b的映射，内层map记录a+b和c的映射
     Map<JdbcType, TypeHandler<?>> jdbcHandlerMap = getJdbcHandlerMap(type);
     TypeHandler<?> handler = null;
     if (jdbcHandlerMap != null) { // 存在jdbcHandlerMap

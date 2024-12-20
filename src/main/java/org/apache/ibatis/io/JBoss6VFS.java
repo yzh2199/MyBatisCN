@@ -91,6 +91,7 @@ public class JBoss6VFS extends VFS {
   /** Find all the classes and methods that are required to access the JBoss 6 VFS. */
   /**
    * 初始化JBoss6VFS类。主要是根据被代理类是否存在来判断自身是否可用
+   * grammar.class.学习，在静态代码里写初始化逻辑，比如这里初始化当前类在环境下是否可用
    */
   protected static synchronized void initialize() {
     if (valid == null) {
